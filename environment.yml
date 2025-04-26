@@ -13,14 +13,12 @@ dependencies:
   - ipywidgets
   - pandas
   - fastcore=1.5.28
-  - jupyterlab
   - ipykernel
   - voila
   - notebook
   - sortedcontainers
-  - jupyter-vuetify
   - pypdf
   - pip
   - pip:
     - langchain-openai
-    - unstructured # for loading markdown files 
+    - unstructured

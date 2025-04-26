@@ -12,7 +12,7 @@ installed…
     following command:
 
 ``` sh
-conda create -f environment.yml
+conda env create -f environment.yml
 ```
 
 2.  Go to the directory of your cloned repository and activate your
