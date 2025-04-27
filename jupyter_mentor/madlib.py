@@ -11,13 +11,14 @@ from functools import partial
 from traitlets import HasTraits
 import os
 from .llm import LLM
-from langchain_openai import ChatOpenAI
+from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain_core.messages import HumanMessage, SystemMessage
 from langchain_core.prompts.chat import (
     ChatPromptTemplate,
     HumanMessagePromptTemplate,
     SystemMessagePromptTemplate,
 )
+
 
 # %% ../nbs/05_madlib.ipynb 3
 class MadLibModel(HasTraits):

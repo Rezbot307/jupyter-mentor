@@ -9,12 +9,12 @@ import traitlets
 from ipywidgets import Textarea, Text, Layout, HBox, Stack, Layout
 from traitlets import HasTraits
 import os
-from langchain_openai import ChatOpenAI
+from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain_core.messages import HumanMessage, SystemMessage
 from langchain_core.prompts.chat import (
     ChatPromptTemplate,
     HumanMessagePromptTemplate,
     SystemMessagePromptTemplate,
 )
-from langchain_openai import ChatOpenAI
+
 from .llm import FileModel

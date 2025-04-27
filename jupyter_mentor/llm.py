@@ -5,25 +5,31 @@ __all__ = ['LLM', 'FileModel']
 
 # %% ../nbs/02_llm.ipynb 1
 from traitlets import HasTraits, Unicode, List
-from langchain_openai import ChatOpenAI
+# from langchain_openai import ChatOpenAI
 import os
+# from langchain.docstore.document import Document
+# from langchain_community.document_loaders import UnstructuredMarkdownLoader
+# from langchain_openai import OpenAIEmbeddings
+# from langchain_community.document_loaders import PyPDFLoader
+# from langchain_community.vectorstores import FAISS
+# from langchain_openai import OpenAIEmbeddings
+from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain.docstore.document import Document
 from langchain_community.document_loaders import UnstructuredMarkdownLoader
-from langchain_openai import OpenAIEmbeddings
 from langchain_community.document_loaders import PyPDFLoader
 from langchain_community.vectorstores import FAISS
-from langchain_openai import OpenAIEmbeddings
+from langchain_google_genai import GoogleGenerativeAIEmbeddings
 
 # %% ../nbs/02_llm.ipynb 2
 class LLM(HasTraits):
 
-    def __init__(self, filepath='OPENAI_API_KEY'):
+    def __init__(self, filepath='GEMINI_API_KEY'):
         super().__init__()
 
         with open(filepath, 'r') as file:
             openai_api_key = file.read().strip()
-        os.environ['OPENAI_API_KEY'] = openai_api_key
-        self.llm = ChatOpenAI(model_name="gpt-3.5-turbo")
+        os.environ['GEMINI_API_KEY'] = openai_api_key
+        self.llm = ChatGoogleGenerativeAI(model_name="gpt-3.5-turbo")
 
 # %% ../nbs/02_llm.ipynb 4
 class FileModel(LLM):
@@ -34,7 +40,7 @@ class FileModel(LLM):
     def __init__(self, course_file_dir = 'course_files/'):
         super().__init__()
         self.course_file_dir = course_file_dir
-        self.embeddings = OpenAIEmbeddings()
+        self.embeddings = GoogleGenerativeAIEmbeddings()
         self.db = None
 
     def save_content_from_upload(values):
