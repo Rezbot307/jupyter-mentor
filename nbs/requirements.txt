@@ -1,3 +1,11 @@
 langchain 
-langchain-google-genai
+langchain_google_genai
 google-generativeai
+ipywidgets
+ipyvuetify
+ipyfilechooser
+langchain_community
+nbdev
+pypdf
+faiss-cpu
+langchain_openai

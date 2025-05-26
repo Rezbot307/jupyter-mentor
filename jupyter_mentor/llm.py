@@ -29,7 +29,7 @@ class LLM(HasTraits):
         with open(filepath, 'r') as file:
             openai_api_key = file.read().strip()
         os.environ['GEMINI_API_KEY'] = openai_api_key
-        self.llm = ChatGoogleGenerativeAI(model_name="gpt-3.5-turbo")
+        self.llm = ChatGoogleGenerativeAI(model="gemini-1.5-flash")
 
 # %% ../nbs/02_llm.ipynb 4
 class FileModel(LLM):
@@ -40,12 +40,12 @@ class FileModel(LLM):
     def __init__(self, course_file_dir = 'course_files/'):
         super().__init__()
         self.course_file_dir = course_file_dir
-        self.embeddings = GoogleGenerativeAIEmbeddings()
+        self.embeddings = GoogleGenerativeAIEmbeddings(model="models/embedding-001")
         self.db = None
 
-    def save_content_from_upload(values):
+    def save_content_from_upload(self, values):
         for value in values:
-            with open(filepath + value['name'], "wb") as fp:
+            with open(self.course_file_dir + value['name'], "wb") as fp:
                 fp.write(value['content'])
 
     def load_text_to_db(self, text):
@@ -66,10 +66,10 @@ class FileModel(LLM):
             self.db = db
         self.files.append(filepath)
 
-    def load_markdown_to_db(filepath):
+    def load_markdown_to_db(self,filepath):
         loader = UnstructuredMarkdownLoader(filepath, mode="elements") #mode=elements breaks up the text into chunks
         doc = loader.load()
-        db = FAISS.from_documents(doc, embeddings)
+        db = FAISS.from_documents(doc, self.embeddings)
         if self.db:
             self.db.merge_from(db)
         else: 
