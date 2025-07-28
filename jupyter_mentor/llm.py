@@ -29,7 +29,7 @@ class LLM(HasTraits):
         with open(filepath, 'r') as file:
             openai_api_key = file.read().strip()
         os.environ['GEMINI_API_KEY'] = openai_api_key
-        self.llm = ChatGoogleGenerativeAI(model="gemini-1.5-flash")
+        self.llm = ChatGoogleGenerativeAI(model="gemini-2.5-flash")
 
 # %% ../nbs/02_llm.ipynb 4
 class FileModel(LLM):
